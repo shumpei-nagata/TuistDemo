@@ -2,6 +2,10 @@ import ProjectDescription
 
 let project = Project(
     name: "TuistDemo",
+    packages: [.remote(
+        url: "https://github.com/Alamofire/Alamofire",
+        requirement: .exact("5.8.1")
+    )],
     targets: [
         .target(
             name: "TuistDemo",
@@ -15,7 +19,12 @@ let project = Project(
             ),
             sources: ["TuistDemo/Sources/**"],
             resources: ["TuistDemo/Resources/**"],
-            dependencies: []
+            scripts: [
+                .pre(script: "echo $PATH", name: "echo path")
+            ],
+            dependencies: [
+                .package(product: "Alamofire")
+            ]
         ),
         .target(
             name: "TuistDemoTests",
